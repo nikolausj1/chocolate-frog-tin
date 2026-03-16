@@ -1,0 +1,14 @@
+# Raw source videos (large)
+Videos/*.mp4
+
+# macOS
+.DS_Store
+._*
+
+# Editor
+*.swp
+*.swo
+*~
+
+# Claude plans
+.claude/

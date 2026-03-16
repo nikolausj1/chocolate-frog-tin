@@ -1,0 +1,16 @@
+[Unit]
+Description=Wizard Card Animation Controller
+After=multi-user.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/python3 /home/pi/wizard-card.py
+WorkingDirectory=/home/pi
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
