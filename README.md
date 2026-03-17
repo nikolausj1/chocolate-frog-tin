@@ -1,8 +1,6 @@
 # Chocolate Frog Tin — Animated Wizard Card
 
-A real animated wizard card inside a Harry Potter Chocolate Frog tin. Open the lid and a randomly selected wizard portrait comes to life on a tiny LCD screen — just like in the films. Close the lid and the screen goes dark.
-
-No soldering. No desktop environment. Just a Pi, a screen, and a little bit of magic.
+A real animated wizard card inside a Harry Potter Chocolate Frog tin. Open the lid and a randomly selected wizard portrait comes to life on a tiny LCD screen, just like in the films. Close the lid and the screen goes dark.
 
 <p align="center">
   <img src="final-product/demo.gif" width="600" alt="Animated wizard card — tin opens and Dumbledore comes to life">
