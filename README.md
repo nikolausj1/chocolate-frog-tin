@@ -69,7 +69,7 @@ Animations generated from portrait stills using [Kling](https://klingai.com/) AI
 | **Dupont wires** | Connects LCD to Pi GPIO |
 | **Hot glue** | Secures dupont connectors |
 
-**Estimated cost: $85-124** — Full parts list with links in the [PRD](PRD.md).
+Full parts list with links in the [PRD](PRD.md).
 
 ---
 
