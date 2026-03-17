@@ -140,7 +140,7 @@ Everything needed to set up the Pi is in the [`pi-files/`](pi-files/) folder:
 | `wizard-card.service` | systemd service for auto-start on boot |
 | `config.txt` | Reference `/boot/firmware/config.txt` with display overlay |
 | `cmdline.txt` | Reference kernel command line (cursor hidden, quiet boot) |
-| `*.mp4` | Pre-formatted 240x320 wizard animations, ready to copy to `~/animations/` |
+| `animations/*.mp4` | Pre-formatted 240x320 wizard animations — `scp -r pi-files/*` copies them to `~/animations/` automatically |
 
 ## Design Decisions
 

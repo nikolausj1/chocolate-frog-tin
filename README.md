@@ -117,22 +117,23 @@ Two PDF templates for the card overlay:
 # SSH into the Pi
 ssh pi@wizardcard.local
 
-# Enable SPI
+# Enable SPI and install ffmpeg
 sudo raspi-config nonint do_spi 0
-
-# Add display overlay to /boot/firmware/config.txt
-dtoverlay=fbtft,spi0-0,ili9341,bgr,reset_pin=27,dc_pin=25,led_pin=18,rotate=0,speed=32000000,fps=60,width=240,height=320
-
-# Install ffmpeg
 sudo apt install -y ffmpeg
 
-# Copy files from this repo's pi-files/ folder
-mkdir -p ~/animations
-scp pi-files/*.mp4 pi@wizardcard.local:~/animations/
-scp pi-files/wizard-card.py pi@wizardcard.local:~/
+# Add display overlay to /boot/firmware/config.txt
+# (append this line to the end of the file)
+dtoverlay=fbtft,spi0-0,ili9341,bgr,reset_pin=27,dc_pin=25,led_pin=18,rotate=0,speed=32000000,fps=60,width=240,height=320
 
-# Install and start the service
-sudo cp wizard-card.service /etc/systemd/system/
+# Reboot to activate SPI and display
+sudo reboot
+
+# From your computer — copy everything to the Pi in one shot
+scp -r pi-files/* pi@wizardcard.local:~/
+
+# SSH back in and install the service
+ssh pi@wizardcard.local
+sudo cp ~/wizard-card.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable wizard-card
 sudo systemctl start wizard-card
@@ -154,7 +155,7 @@ chocolate-frog-tin/
 │   ├── wizard-card.service
 │   ├── config.txt         ← Boot config reference
 │   ├── cmdline.txt        ← Kernel command line reference
-│   └── *.mp4              ← Pre-formatted 240x320 animations
+│   └── animations/        ← Pre-formatted 240x320 animations
 ├── printables/            ← PDF templates for the card
 │   ├── wizard-card-print.pdf
 │   └── wizard-card-cutout.pdf

@@ -293,13 +293,13 @@ Expected file sizes: **115-283 KB per video**. These are tiny files that the Pi 
 
 ### Copy to the Pi
 
-```bash
-# Create the animations directory on the Pi
-ssh pi@wizardcard.local "mkdir -p ~/animations"
+The repo's `pi-files/` folder mirrors the Pi's home directory structure, so a single recursive copy puts everything in the right place:
 
-# Copy all formatted videos
-scp pi-files/*.mp4 pi@wizardcard.local:~/animations/
+```bash
+scp -r pi-files/* pi@wizardcard.local:~/
 ```
+
+This copies the animations into `~/animations/` on the Pi (along with the control script and config files).
 
 ### Verify on the Pi
 
@@ -330,16 +330,20 @@ The control script and systemd service are provided in the `pi-files/` directory
 
 ### Deploy to the Pi
 
-```bash
-# Copy the control script
-scp pi-files/wizard-card.py pi@wizardcard.local:~/
+If you haven't already copied the repo files over (from Session 5), do it now:
 
-# Copy and install the systemd service
-scp pi-files/wizard-card.service pi@wizardcard.local:~/
-ssh pi@wizardcard.local "sudo cp ~/wizard-card.service /etc/systemd/system/ && \
-  sudo systemctl daemon-reload && \
-  sudo systemctl enable wizard-card && \
-  sudo systemctl start wizard-card"
+```bash
+scp -r pi-files/* pi@wizardcard.local:~/
+```
+
+Then SSH in and install the service:
+
+```bash
+ssh pi@wizardcard.local
+sudo cp ~/wizard-card.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable wizard-card
+sudo systemctl start wizard-card
 ```
 
 ### Test with a Jumper Wire
@@ -537,7 +541,7 @@ Printable card files:
 | `printables/wizard-card-print.pdf` | Full card template for color printing on heavy cardstock |
 | `printables/wizard-card-cutout.pdf` | Portrait window cutout file for laser cutter (xTool F1 Ultra or similar) |
 
-Pre-formatted videos are in `pi-files/` alongside the scripts (240x320, 24fps, H.264, no audio). Copy them to `~/animations/` on the Pi.
+Pre-formatted videos are in `pi-files/animations/` (240x320, 24fps, H.264, no audio). The `scp -r pi-files/*` command copies them to `~/animations/` on the Pi automatically.
 
 ---
 
