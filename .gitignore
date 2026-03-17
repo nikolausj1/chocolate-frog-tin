@@ -1,5 +1,11 @@
-# Raw source videos (large)
-Videos/*.mp4
+# Working folders (not for the public repo)
+Design Assets/
+Finished Product/
+Videos/
+
+# Old doc files (replaced by BUILD_GUIDE.md and PRD.md)
+Chocolate_frog_execution.md
+Chocolate_frog_wizard_card_project.md
 
 # macOS
 .DS_Store
@@ -10,5 +16,5 @@ Videos/*.mp4
 *.swo
 *~
 
-# Claude plans
+# Claude
 .claude/

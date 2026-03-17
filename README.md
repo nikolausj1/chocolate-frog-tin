@@ -1,116 +1,187 @@
 # Chocolate Frog Tin — Animated Wizard Card
 
-A Raspberry Pi-powered animated wizard card that fits inside a Harry Potter Chocolate Frog tin. When the lid opens, a small LCD screen plays a randomly selected wizard portrait animation. When the lid closes, the screen goes dark. Just like magic.
+A real animated wizard card inside a Harry Potter Chocolate Frog tin. Open the lid and a randomly selected wizard portrait comes to life on a tiny LCD screen — just like in the films. Close the lid and the screen goes dark.
+
+No soldering. No desktop environment. Just a Pi, a screen, and a little bit of magic.
+
+<p align="center">
+  <img src="final-product/01_final_build.jpg" width="600" alt="Finished animated wizard card in hand, next to the Chocolate Frog tin">
+</p>
+
+<p align="center">
+  <a href="final-product/demo.mp4">
+    <img src="https://img.shields.io/badge/Watch%20Demo-Video-blue?style=for-the-badge&logo=youtube" alt="Watch Demo">
+  </a>
+</p>
+
+https://github.com/user-attachments/assets/demo
+
+https://github.com/nikolausj1/chocolate-frog-tin/raw/main/final-product/demo.mp4
+
+---
 
 ## How It Works
 
-1. A **reed switch** detects when the tin lid opens (magnet moves away)
+1. A **reed switch** inside the tin detects when the lid opens (magnet in the lid moves away)
 2. A **Python script** picks a random wizard animation
-3. **ffmpeg** plays the video directly to the LCD's framebuffer
-4. When the lid closes, the video stops and the screen goes black
-5. Everything runs on battery power via a **PiSugar 3**
+3. **ffmpeg** plays the video directly to the LCD framebuffer
+4. When the video ends, the **last frame stays on screen** — like a real portrait
+5. Close the lid and the screen **immediately goes black**
+6. Everything runs on battery via a **PiSugar 3** — no wires, just open and enjoy
 
-## Hardware
+---
 
-| Component | Details |
-|-----------|---------|
-| **Computer** | Raspberry Pi Zero 2 WH (pre-soldered headers) |
-| **Display** | Waveshare 2.4" ILI9341 SPI TFT LCD (240×320) |
-| **Battery** | PiSugar 3 (1200mAh, USB-C charging) |
-| **Trigger** | Gebildet reed switch + neodymium magnet |
-| **Storage** | Samsung EVO Plus 32GB MicroSD |
-| **OS** | Raspbian Trixie (Debian 13), headless |
+## The Build
+
+<p align="center">
+  <img src="final-product/05_final_build.jpg" width="600" alt="Full hardware assembly — Pi Zero 2 WH with PiSugar 3 battery, LCD, and wiring">
+</p>
+
+<p align="center"><em>Pi Zero 2 WH + PiSugar 3 battery + Waveshare 2.4" LCD</em></p>
+
+<p align="center">
+  <img src="final-product/02_final_build.jpg" width="600" alt="Inside the tin — electronics with card mat lifted off">
+</p>
+
+<p align="center"><em>Everything fits inside a standard Chocolate Frog tin</em></p>
+
+<p align="center">
+  <img src="final-product/04_final_build.jpg" width="600" alt="Reed switch and neodymium magnet placement detail">
+</p>
+
+<p align="center"><em>Reed switch in the base, neodymium magnet in the lid</em></p>
+
+---
 
 ## Characters
 
-- Godric Gryffindor
-- Salazar Slytherin
-- Rowena Ravenclaw
-- Helga Hufflepuff
-- Albus Dumbledore
+| Wizard | Animation |
+|--------|-----------|
+| Godric Gryffindor | Warm greeting, nod, then walks away |
+| Salazar Slytherin | Cold stare, sinister nod, then walks away |
+| Rowena Ravenclaw | Knowing smile, wave, then walks away |
+| Helga Hufflepuff | Friendly wave, then walks away |
+| Albus Dumbledore | Warm nod and wave, then walks away |
 
-Animations were generated from still portraits using AI video tools (Kling), then cropped to 3:4 and resized to 240×320 for the LCD.
+Animations generated from portrait stills using [Kling](https://klingai.com/) AI. 8 seconds each, 24fps.
+
+---
+
+## Hardware
+
+| Component | Purpose |
+|-----------|---------|
+| **Raspberry Pi Zero 2 WH** | Brain — pre-soldered headers, no soldering needed |
+| **Waveshare 2.4" ILI9341 LCD** | 240x320 SPI display |
+| **PiSugar 3** | Battery + charging + 5V boost — pogo pin connection |
+| **Reed switch + magnet** | Detects lid open/close |
+| **Samsung 32GB MicroSD** | Stores OS and animations |
+| **Dupont wires** | Connects LCD to Pi GPIO |
+| **Hot glue** | Secures dupont connectors |
+
+**Estimated cost: $85-124** — Full parts list with links in the [PRD](PRD.md).
+
+---
 
 ## Wiring
 
 | LCD Pin | Pi Pin | Physical Pin |
 |---------|--------|-------------|
-| VCC | 3.3V | Pin 1 |
-| GND | GND | Pin 6 |
-| DIN | SPI0 MOSI | Pin 19 |
-| CLK | SPI0 SCLK | Pin 23 |
-| CS | SPI0 CE0 | Pin 24 |
-| DC | GPIO 25 | Pin 22 |
-| RST | GPIO 27 | Pin 13 |
-| BL | GPIO 18 | Pin 12 |
+| VCC | 3.3V | 1 |
+| GND | GND | 6 |
+| DIN | SPI0 MOSI | 19 |
+| CLK | SPI0 SCLK | 23 |
+| CS | SPI0 CE0 | 24 |
+| DC | GPIO 25 | 22 |
+| RST | GPIO 27 | 13 |
+| BL | GPIO 18 | 12 |
 
-Reed switch: GPIO 26 (Pin 37) to GND (Pin 39)
+Reed switch: **GPIO 26** (Pin 37) → **GND** (Pin 39)
 
-## Software Setup
+---
 
-### Display Driver
+## Printables
 
-Uses the built-in `fbtft` kernel module. Add to `/boot/firmware/config.txt`:
+Two PDF templates for the card overlay:
 
-```
-dtparam=spi=on
-dtoverlay=fbtft,spi0-0,ili9341,bgr,reset_pin=27,dc_pin=25,led_pin=18,rotate=0,speed=32000000,fps=60,width=240,height=320
-```
+| File | What It Is |
+|------|-----------|
+| [`wizard-card-print.pdf`](printables/wizard-card-print.pdf) | Full card — print on heavy cardstock with a color printer |
+| [`wizard-card-cutout.pdf`](printables/wizard-card-cutout.pdf) | Portrait window — send to a laser cutter to cut the viewing area |
 
-### Boot Config
+---
 
-Add to `/boot/firmware/cmdline.txt`:
-```
-quiet vt.global_cursor_default=0 consoleblank=0 logo.nologo
-```
-
-Disable login prompt on LCD:
-```
-sudo systemctl disable getty@tty1
-```
-
-### Control Script
-
-Copy `pi-files/wizard-card.py` to the Pi and install the systemd service:
+## Quick Start
 
 ```bash
-# Copy files
+# SSH into the Pi
+ssh pi@wizardcard.local
+
+# Enable SPI
+sudo raspi-config nonint do_spi 0
+
+# Add display overlay to /boot/firmware/config.txt
+dtoverlay=fbtft,spi0-0,ili9341,bgr,reset_pin=27,dc_pin=25,led_pin=18,rotate=0,speed=32000000,fps=60,width=240,height=320
+
+# Install ffmpeg
+sudo apt install -y ffmpeg
+
+# Copy files from this repo's pi-files/ folder
+mkdir -p ~/animations
+scp pi-files/*.mp4 pi@wizardcard.local:~/animations/
 scp pi-files/wizard-card.py pi@wizardcard.local:~/
+
+# Install and start the service
 sudo cp wizard-card.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable wizard-card
 sudo systemctl start wizard-card
 ```
 
-### Video Playback
+Full step-by-step instructions in the **[Build Guide](BUILD_GUIDE.md)**.
 
-Videos play via ffmpeg direct to the framebuffer:
+---
+
+## Repo Structure
+
 ```
-ffmpeg -re -i <video> -vf 'format=rgb565le' -f fbdev /dev/fb0
+chocolate-frog-tin/
+├── README.md              ← You are here
+├── PRD.md                 ← Product requirements, specs, parts list
+├── BUILD_GUIDE.md         ← Step-by-step build instructions
+├── pi-files/              ← Everything for the Pi
+│   ├── wizard-card.py     ← Control script
+│   ├── wizard-card.service
+│   ├── config.txt         ← Boot config reference
+│   ├── cmdline.txt        ← Kernel command line reference
+│   └── *.mp4              ← Pre-formatted 240x320 animations
+├── printables/            ← PDF templates for the card
+│   ├── wizard-card-print.pdf
+│   └── wizard-card-cutout.pdf
+└── final-product/         ← Photos and demo video
+    ├── demo.mp4
+    └── *.jpg
 ```
 
-## Project Files
+---
 
-- `Chocolate_frog_wizard_card_project.md` — Full project specification
-- `Chocolate_frog_execution.md` — Step-by-step build guide with lessons learned
-- `pi-files/wizard-card.py` — Main control script
-- `pi-files/wizard-card.service` — Systemd service file
-- `pi-files/config.txt` — Boot config reference
-- `pi-files/cmdline.txt` — Kernel command line reference
-- `Videos/formatted/` — LCD-ready animations (240×320, 24fps)
+## Tips
 
-## Key Lessons Learned
+- **Use `fbtft`, not `fbcp-ili9341`.** Raspbian Trixie (Debian 13) removed the legacy VideoCore libraries. The `fbtft` kernel dtoverlay works out of the box.
+- **ffmpeg direct to framebuffer** is all you need for video playback on an SPI display. No mpv, no vlc, no desktop.
+- **PiSugar 3** eliminates all battery wiring — pogo pins connect through the back of the Pi. USB-C charging built in.
+- **Hot glue your dupont connectors** to the GPIO header. They will come loose inside the tin otherwise.
+- **Add `quiet vt.global_cursor_default=0 logo.nologo`** to `cmdline.txt` so the LCD boots to a clean black screen instead of showing kernel messages and a blinking cursor.
+- **Disable `getty@tty1`** so the login prompt doesn't appear on the LCD.
 
-- **Raspbian Trixie (Debian 13)** removed the legacy VideoCore libraries, so `fbcp-ili9341` doesn't compile. Use the `fbtft` kernel dtoverlay instead.
-- **ffmpeg direct to framebuffer** works great for video playback on SPI displays — no need for mpv or vlc.
-- **PiSugar 3** eliminates all battery wiring (no soldering needed) — pogo pins connect through the back of the Pi.
-- Hot glue dupont connectors to the GPIO header to prevent wires from coming loose.
+---
 
 ## Built With
 
-- [Claude Code](https://claude.ai) — All Pi software written and deployed via Claude Code over SSH
+- [Claude Code](https://claude.ai) — All software written and deployed via Claude Code over SSH
+- [Kling](https://klingai.com/) — AI-generated wizard portrait animations
 - Raspberry Pi Zero 2 WH
-- Kling AI — Wizard portrait animations
+- Lots of hot glue
 
 ## License
 
