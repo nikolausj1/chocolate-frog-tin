@@ -5,18 +5,10 @@ A real animated wizard card inside a Harry Potter Chocolate Frog tin. Open the l
 No soldering. No desktop environment. Just a Pi, a screen, and a little bit of magic.
 
 <p align="center">
-  <img src="final-product/01_final_build.jpg" width="600" alt="Finished animated wizard card in hand, next to the Chocolate Frog tin">
+  <img src="final-product/demo.gif" width="600" alt="Animated wizard card — tin opens and Dumbledore comes to life">
 </p>
 
-<p align="center">
-  <a href="final-product/demo.mp4">
-    <img src="https://img.shields.io/badge/Watch%20Demo-Video-blue?style=for-the-badge&logo=youtube" alt="Watch Demo">
-  </a>
-</p>
-
-https://github.com/user-attachments/assets/demo
-
-https://github.com/nikolausj1/chocolate-frog-tin/raw/main/final-product/demo.mp4
+> **[Watch the full demo video →](final-product/demo.mp4)**
 
 ---
 
@@ -160,6 +152,7 @@ chocolate-frog-tin/
 │   ├── wizard-card-print.pdf
 │   └── wizard-card-cutout.pdf
 └── final-product/         ← Photos and demo video
+    ├── demo.gif           ← Animated preview for README
     ├── demo.mp4
     └── *.jpg
 ```
