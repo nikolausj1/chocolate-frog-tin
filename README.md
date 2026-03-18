@@ -1,4 +1,4 @@
-# Chocolate Frog Tin — Animated Wizard Card
+# Animated Wizard Card in a Chocolate Frog Tin
 
 My kids were so excited to visit Honeydukes at the Wizarding World in Universal Studios Florida and get their hands on some Chocolate Frogs. They loved the tins and the wizard cards inside, which actually had a pretty cool effect using lenticular printing. But I wanted to make them better. More realistic. Moving portraits, just like in the films.
 
