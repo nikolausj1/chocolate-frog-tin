@@ -1,6 +1,10 @@
 # Chocolate Frog Tin — Animated Wizard Card
 
-A real animated wizard card inside a Harry Potter Chocolate Frog tin. Open the lid and a randomly selected wizard portrait comes to life on a tiny LCD screen, just like in the films. Close the lid and the screen goes dark.
+My kids were so excited to visit Honeydukes at the Wizarding World in Universal Studios Florida and get their hands on some Chocolate Frogs. They loved the tins and the wizard cards inside, which actually had a pretty cool effect using lenticular printing. But I wanted to make them better. More realistic. Moving portraits, just like in the films.
+
+So I built one.
+
+This is a real Chocolate Frog tin with an animated wizard portrait inside. When you open the lid, a random wizard comes to life on a tiny screen embedded in the card. Close the lid and it goes dark, ready to surprise you with a different wizard next time.
 
 <p align="center">
   <img src="final-product/demo.gif" width="600" alt="Animated wizard card — tin opens and Dumbledore comes to life">
