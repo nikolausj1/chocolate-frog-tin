@@ -10,7 +10,7 @@ This is a real Chocolate Frog tin with an animated wizard portrait inside. When 
   <img src="final-product/demo.gif" width="600" alt="Animated wizard card — tin opens and Dumbledore comes to life">
 </p>
 
-> **[Watch the full demo video →](final-product/demo.mp4)**
+> **[Watch the full demo video →](https://www.youtube.com/watch?v=h4gXsBKNhGw)**
 
 ---
 
